@@ -1,0 +1,22 @@
+<h1>{{title}}</h1>
+
+<nav>
+  <a routerLink="/">Inicio</a>
+  <a routerLink="/acerca">Acerca</a>
+  <a routerLink="/contacto">Contacto</a>
+  
+  <ng-container *ngIf="!usuarioActual">
+    <a routerLink="/login" class="boton-login">Login</a>
+  </ng-container>
+  
+  <ng-container *ngIf="usuarioActual">
+    <span style="margin-left: auto;">Bienvenido, {{usuarioActual}}</span>
+    <button (click)="logout()" class="boton-login">Logout</button>
+  </ng-container>
+  
+</nav>
+
+<hr />
+
+<router-outlet></router-outlet>
+
