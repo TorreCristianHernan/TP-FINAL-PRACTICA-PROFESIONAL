@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  dynamic-api:
+    build: .
+    container_name: dynamic-api
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://ferrefull-ferrefull-ro.g.aivencloud.com:25526/defaultdb?sslMode=REQUIRED
+      - SPRING_DATASOURCE_USERNAME=avnadmin
+      - SPRING_DATASOURCE_PASSWORD=AVNS_3CYhqEaVQF1Zk86Vjdo
+    restart: always

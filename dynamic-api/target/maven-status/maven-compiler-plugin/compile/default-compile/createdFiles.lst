@@ -1,0 +1,10 @@
+com\example\dynamicapi\exception\GlobalExceptionHandler.class
+com\example\dynamicapi\config\OpenApiConfig.class
+com\example\dynamicapi\service\DynamicQueryService.class
+com\example\dynamicapi\dto\ApiResponse.class
+com\example\dynamicapi\service\MetadataService.class
+com\example\dynamicapi\controller\MetadataController.class
+com\example\dynamicapi\DynamicApiApplication.class
+com\ferrefull\dynamicapi\util\DatabaseUtils.class
+com\example\dynamicapi\controller\DynamicTableController.class
+com\example\dynamicapi\dto\TableRequestDTO.class
