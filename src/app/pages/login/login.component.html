@@ -18,11 +18,13 @@
       </div>
     </div>
 
-    <button type="submit" [disabled]="loginForm.invalid">Ingresar</button>
-
-    <div class="error" *ngIf="error">
-      {{ error }}
-    </div>
+    <button type="submit" [disabled]="loading">
+      {{ loading ? 'Validando datos...' : 'Iniciar sesión' }}
+    </button>
   </form>
+
+  <div class="error" *ngIf="error">
+    {{ error }}
+  </div>
 </div>
 
