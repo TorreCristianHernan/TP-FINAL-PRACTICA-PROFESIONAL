@@ -7,7 +7,7 @@ FERREFULL es una plataforma web desarrollada en Angular que permite a cada vende
 
 Características Principales:
 
- [Listar las características principales de la plataforma, por ejemplo: Gestión de productos, Gestión de clientes, Panel de control individual para vendedores, Panel de administración centralizado, etc.]
+ [Listar las características principales de la plataforma, por ejemplo: Gestión de productos, Gestión de clientes, Panel de control individual para vendedores, Panel de administración centralizado,celendario para organizar llamadas con clientes, etc.]
 
 Acceso:
 
