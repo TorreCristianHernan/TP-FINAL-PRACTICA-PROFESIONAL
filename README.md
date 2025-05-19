@@ -1,8 +1,22 @@
-# ProjectFerrefull
+ ProjectFerrefull
+ FERREFULL - Plataforma para Vendedores
+
+Descripción:
+
+FERREFULL es una plataforma web desarrollada en Angular que permite a cada vendedor tener su propia base de datos de productos y clientes. El administrador general tiene acceso a la información de todas las bases de datos de los vendedores para una gestión centralizada.
+
+Características Principales:
+
+ [Listar las características principales de la plataforma, por ejemplo: Gestión de productos, Gestión de clientes, Panel de control individual para vendedores, Panel de administración centralizado, etc.]
+
+Acceso:
+
+Vendedores: Acceden con sus credenciales para gestionar su base de datos individual.
+Administrador:: Accede con credenciales especiales para visualizar y gestionar todas las bases de datos de los vendedores.
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.7.
 
-## Development server
+Development server
 
 To start a local development server, run:
 
