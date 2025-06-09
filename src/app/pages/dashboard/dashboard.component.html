@@ -1,0 +1,39 @@
+<div class="dashboard-container">
+   <h1>Bienvenido, {{ username }}!</h1>
+ 
+   <section class="stats-grid">
+     <div class="card">
+       <h2>Fecha de creación</h2>
+       <p>{{ createdAt | date:'longDate' }}</p>
+     </div>
+     <div class="card">
+       <h2>Días desde creación</h2>
+       <p>{{ daysSinceCreation }}</p>
+     </div>
+     <div class="card">
+       <h2>Clientes asociados</h2>
+       <p>{{ clientsCount }}</p>
+     </div>
+   </section>
+ 
+   <section class="orders-section">
+     <h2>Pedidos recientes</h2>
+     <table>
+       <thead>
+         <tr>
+           <th>ID Pedido</th>
+           <th>Fecha</th>
+           <th>Monto</th>
+         </tr>
+       </thead>
+       <tbody>
+         <tr *ngFor="let order of orders">
+           <td>{{ order.id }}</td>
+           <td>{{ order.date }}</td>
+           <td>{{ order.amount | currency:'ARS':'symbol':'1.2-2' }}</td>
+         </tr>
+       </tbody>
+     </table>
+   </section>
+ </div>
+ 
