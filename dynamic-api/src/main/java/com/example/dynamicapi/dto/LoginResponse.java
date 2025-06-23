@@ -4,7 +4,17 @@ public class LoginResponse {
     private boolean success;
     private String username;
 
+    private String token;
+
     public LoginResponse() {
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public LoginResponse(boolean success, String username) {

@@ -1,21 +1,26 @@
 package com.example.dynamicapi.service;
 
-import com.example.dynamicapi.dto.TableRequestDTO;
-import lombok.extern.slf4j.Slf4j;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import javax.sql.DataSource;
+import com.example.dynamicapi.dto.TableRequestDTO;
 
-
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.util.*;
-import java.sql.Connection;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
@@ -35,7 +40,6 @@ public class DynamicQueryService {
     public DynamicQueryService(DataSource dataSource) {
         this.dataSource = dataSource;
     }
-    
     public Map<String, Object> getTableData(TableRequestDTO request) {
         JdbcTemplate tpl = createTplForDb(request.getDb());
 
@@ -63,6 +67,11 @@ public class DynamicQueryService {
         String countQ = "SELECT COUNT(*) FROM " + request.getTableName() +
                 (params.isEmpty() ? "" : " WHERE " + request.getFilterColumn() + " LIKE ?");
         Long total = tpl.queryForObject(countQ, Long.class, params.toArray());
+        if (total == null) {
+            total = 0L;
+        }
+      
+
         int totalPages = (int)Math.ceil(total.doubleValue() / size);
 
         List<Map<String, Object>> rows = tpl.queryForList(q.toString(), params.toArray());
@@ -82,7 +91,6 @@ public class DynamicQueryService {
         try (Connection conn = dataSource.getConnection()){
             DatabaseMetaData md = conn.getMetaData();
             ResultSet rs = md.getTables(db, null, "%", new String[]{"TABLE"});
-            
             while (rs.next()) {
                 tables.add(rs.getString("TABLE_NAME"));
             }

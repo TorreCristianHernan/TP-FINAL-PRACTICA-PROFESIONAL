@@ -1,11 +1,25 @@
 package com.example.dynamicapi.model;
 
-
-import jakarta.persistence.*;
-import lombok.*;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 
 @Entity
 @Table(name = "clients")
@@ -48,12 +62,14 @@ public class Client {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
-    private Status status = Status.lead;
+    private final Status status = Status.LEAD;
 
+    @Builder.Default
     @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
     public enum Status {
-        lead, prospect, customer
+        LEAD, PROSPECT, CUSTOMER
     }
+
 }

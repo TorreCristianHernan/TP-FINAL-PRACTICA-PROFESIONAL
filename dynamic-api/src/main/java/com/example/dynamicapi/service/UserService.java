@@ -3,7 +3,6 @@ package com.example.dynamicapi.service;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.dynamicapi.model.User;
@@ -13,37 +12,45 @@ import com.example.dynamicapi.service.interfaces.IUserService;
 @Service
 public class UserService implements IUserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public List<User> getAllUsers() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAllUsers'");
+        return userRepository.findAll();
     }
 
     @Override
     public User getUserById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getUserById'");
+        return userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
     }
 
     @Override
     public User createUser(User user) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createUser'");
+        return userRepository.save(user);
     }
 
     @Override
     public User updateUser(Long id, User user) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'updateUser'");
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+        existingUser.setUsername(user.getUsername());
+        existingUser.setPassword(user.getPassword());
+        existingUser.setEmail(user.getEmail());
+        existingUser.setRole(user.getRole());
+        return userRepository.save(existingUser);
     }
 
     @Override
     public void deleteUser(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteUser'");
+        if (!userRepository.existsById(id)) {
+            throw new RuntimeException("User not found with id: " + id);
+        }
+        userRepository.deleteById(id);
     }
 
     @Override

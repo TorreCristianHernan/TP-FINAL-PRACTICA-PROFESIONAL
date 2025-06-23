@@ -3,6 +3,7 @@ package com.example.dynamicapi;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.lang.NonNull;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -28,7 +29,7 @@ public class DynamicApiApplication {
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
             @Override
-            public void addCorsMappings(CorsRegistry registry) {
+            public void addCorsMappings(@NonNull CorsRegistry registry) {
                 registry.addMapping("/**")  // Aplica a todos los endpoints
                         .allowedOrigins("http://localhost:4200") // URL del frontend
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos permitidos
