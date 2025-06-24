@@ -35,7 +35,7 @@ export class AuthService {
         map(({ token }) => token),
         catchError(err => throwError(() => err))
       );
-          
+
   }
 
   logout(): void {
@@ -49,6 +49,10 @@ export class AuthService {
   }
 
   getUsuarioActual(): string | null {
+    return this.userSubject.getValue();
+  }
+
+  getUsuarioActualId(): string | null {
     return this.userSubject.getValue();
   }
 

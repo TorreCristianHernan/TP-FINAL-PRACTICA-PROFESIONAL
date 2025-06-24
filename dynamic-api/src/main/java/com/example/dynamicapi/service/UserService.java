@@ -3,6 +3,13 @@ package com.example.dynamicapi.service;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.dynamicapi.security.details.UserInfoDetails;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.dynamicapi.model.User;
@@ -10,13 +17,10 @@ import com.example.dynamicapi.repository.UserRepository;
 import com.example.dynamicapi.service.interfaces.IUserService;
 
 @Service
-public class UserService implements IUserService {
+public class UserService implements IUserService, UserDetailsService {
 
+    @Autowired
     private final UserRepository userRepository;
-
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public List<User> getAllUsers() {
@@ -64,4 +68,10 @@ public class UserService implements IUserService {
     public Optional<User> getUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    Optional<User> user = userRepository.findByUsername(username);
+    return user.map(UserInfoDetails::new).orElseThrow(() -> new UsernameNotFoundException("User not found by " + user));
+  }
 }

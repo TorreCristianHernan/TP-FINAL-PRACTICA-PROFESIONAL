@@ -51,6 +51,8 @@ public class User {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    private String roles;
+
     public enum Role {
         admin,
         seller,
