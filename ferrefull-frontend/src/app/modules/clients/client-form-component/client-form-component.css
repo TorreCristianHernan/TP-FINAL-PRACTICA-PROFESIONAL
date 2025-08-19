@@ -1,0 +1,86 @@
+/* Estilos generales del formulario */
+.cliente-form-container {
+  /* padding: 1.5rem; */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Estilos para los campos del formulario */
+.form-control {
+  margin-bottom: 1rem;
+}
+
+/* Estilos para los mensajes de error */
+.invalid-feedback {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: #dc3545;
+}
+
+/* Estilos para los botones */
+.btn-group {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+/* Estilos para el header del drawer */
+.drawer-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f9fa;
+}
+
+.drawer-title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+/* Estilos para el cuerpo del drawer */
+.drawer-body {
+  padding: 1.5rem;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+/* Ajustes para inputs */
+.form-control {
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid #ced4da;
+  width: 100%;
+}
+
+.form-control:focus {
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Estilos para los botones */
+.btn {
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}

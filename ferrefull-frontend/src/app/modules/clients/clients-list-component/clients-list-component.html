@@ -1,0 +1,73 @@
+<div class="container mt-4">
+  <!-- Toasts -->
+  <div class="toast-container">
+    <ngb-toast
+      *ngFor="let toast of toastService.toasts"
+      [class]="toast.classname"
+      [autohide]="true"
+      [delay]="toast.delay || 5000"
+      (hidden)="toastService.remove(toast)"
+      [class.show]="!toast.hide"
+      [class.hide]="toast.hide"
+    >
+      {{ toast.textOrTpl }}
+    </ngb-toast>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Listado de Clientes</h2>
+    <button class="btn btn-success" (click)="openNewClienteDialog()">
+      <i class="bi bi-plus"></i> Nuevo Cliente
+    </button>
+  </div>
+
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading">
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of clientes">
+          <td>{{ cliente.id }}</td>
+          <td>{{ cliente.firstName + " " + cliente.lastName }}</td>
+          <td>{{ cliente.email }}</td>
+          <td>{{ cliente.phone }}</td>
+          <td>{{ cliente.state }}</td>
+          <td>
+            <div class="btn-group">
+              <button
+                class="btn btn-warning btn-sm"
+                (click)="openEditClienteDialog(cliente)"
+              >
+                <i class="bi bi-pencil"></i> Editar
+              </button>
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="confirmDelete(cliente)"
+              >
+                <i class="bi bi-trash"></i> Eliminar
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="clientes.length === 0" class="alert alert-info">
+      No hay clientes registrados.
+    </div>
+  </div>
+</div>

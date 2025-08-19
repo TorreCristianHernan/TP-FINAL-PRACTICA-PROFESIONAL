@@ -1,0 +1,2 @@
+insert into users (email, first_name, last_name, password, phone, roles, state)
+values ('demo@correo.com', 'Mario', 'Fuentes', '$2a$10$btl9UaD5EgeM/tlgy1AyluIyF.CXK/Dt.W2C6nKy0qSpJH1ywBwm6', '987456321', 'ADMIN', '1')

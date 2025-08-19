@@ -1,0 +1,78 @@
+/* Estilos globales para el drawer */
+.side-drawer .modal-content {
+  border-radius: 0;
+  border: none;
+  height: 100vh;
+  margin: 0;
+  right: 0;
+  position: fixed;
+  width: 500px;
+  max-width: 90vw;
+}
+
+/* Transición suave */
+.side-drawer .modal-dialog {
+  transition: transform 0.3s ease-out;
+  transform: translateX(100%);
+  margin: 0;
+  width: auto;
+  max-width: 100%;
+  height: 100%;
+}
+
+.side-drawer.show .modal-dialog {
+  transform: translateX(0);
+}
+
+/* Ajustes para el backdrop */
+.modal-backdrop {
+  opacity: 0.5;
+  background-color: #000;
+}
+
+/* Asegurar que el drawer esté por encima de otros elementos */
+.side-drawer {
+  z-index: 1060;
+}
+
+.toast-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1100;
+  width: auto;
+  max-width: 100%;
+}
+
+/* Animación para aparecer/desaparecer */
+.toast {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.toast.hide {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+/* Estilo para toast individual */
+.ngb-toast {
+  margin-bottom: 15px;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('assets/fondo.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100vh;
+  font-family: sans-serif;
+}

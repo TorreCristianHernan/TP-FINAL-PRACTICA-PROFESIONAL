@@ -1,0 +1,148 @@
+<div class="cliente-form-container">
+  <div class="drawer-header">
+    <h4 class="drawer-title">
+      {{ isEdit ? "Editar Cliente" : "Nuevo Cliente" }}
+    </h4>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="activeModal.dismiss()"
+    ></button>
+  </div>
+
+  <div class="drawer-body">
+    <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="firstName" class="form-label">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          formControlName="firstName"
+          [class.is-invalid]="
+            clienteForm.get('firstName')?.invalid &&
+            clienteForm.get('firstName')?.touched
+          "
+        />
+        <div
+          *ngIf="
+            clienteForm.get('firstName')?.invalid &&
+            clienteForm.get('firstName')?.touched
+          "
+          class="invalid-feedback"
+        >
+          Nombre es requerido
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Apellido</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastName"
+          formControlName="lastName"
+          [class.is-invalid]="
+            clienteForm.get('lastName')?.invalid &&
+            clienteForm.get('lastName')?.touched
+          "
+        />
+        <div
+          *ngIf="
+            clienteForm.get('lastName')?.invalid &&
+            clienteForm.get('lastName')?.touched
+          "
+          class="invalid-feedback"
+        >
+          Apellido es requerido
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="phone" class="form-label">Teléfono</label>
+        <input
+          type="text"
+          class="form-control"
+          id="phone"
+          formControlName="phone"
+          [class.is-invalid]="
+            clienteForm.get('phone')?.invalid &&
+            clienteForm.get('phone')?.touched
+          "
+        />
+        <div
+          *ngIf="
+            clienteForm.get('phone')?.invalid &&
+            clienteForm.get('phone')?.touched
+          "
+          class="invalid-feedback"
+        >
+          Teléfono es requerido
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          formControlName="email"
+          [class.is-invalid]="
+            clienteForm.get('email')?.invalid &&
+            clienteForm.get('email')?.touched
+          "
+        />
+        <div
+          *ngIf="
+            clienteForm.get('email')?.hasError('required') &&
+            clienteForm.get('email')?.touched
+          "
+          class="invalid-feedback"
+        >
+          Email es requerido
+        </div>
+        <div
+          *ngIf="
+            clienteForm.get('email')?.hasError('email') &&
+            clienteForm.get('email')?.touched
+          "
+          class="invalid-feedback"
+        >
+          Email no válido
+        </div>
+      </div>
+
+      <!-- <div class="mb-3">
+        <label for="telefono" class="form-label">Teléfono</label>
+        <input
+          type="text"
+          class="form-control"
+          id="telefono"
+          formControlName="telefono"
+          [class.is-invalid]="clienteForm.get('telefono')?.invalid && clienteForm.get('telefono')?.touched">
+        <div *ngIf="clienteForm.get('telefono')?.invalid && clienteForm.get('telefono')?.touched"
+             class="invalid-feedback">
+          Teléfono es requerido
+        </div>
+      </div> -->
+
+      <div class="btn-group">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="activeModal.dismiss()"
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="clienteForm.invalid"
+        >
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

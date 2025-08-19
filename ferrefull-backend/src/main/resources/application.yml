@@ -1,0 +1,19 @@
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  datasource:
+    url: jdbc:mysql://ferrefull-ferrefull-ro.g.aivencloud.com:25526/Desarrollo?sslMode=REQUIRED
+    username: ferrefull-be
+    password: AVNS_Hgh4TmYYS7s0a7sbZBm
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  logging:
+    pattern:
+      console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"

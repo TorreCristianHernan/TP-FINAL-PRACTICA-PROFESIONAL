@@ -1,0 +1,71 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Gestión de Productos</h2>
+        <button class="btn btn-primary" (click)="openNewProductDialog()">
+          <i class="fas fa-plus"></i> Nuevo Producto
+        </button>
+      </div>
+
+      <div *ngIf="isLoading" class="text-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!isLoading" class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>SKU</th>
+                  <th>Nombre</th>
+                  <th>Descripción</th>
+                  <th>Stock</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of products">
+                  <td>{{ product.id }}</td>
+                  <td>{{ product.sku }}</td>
+                  <td>{{ product.name }}</td>
+                  <td>{{ product.description }}</td>
+                  <td>
+                    <span class="badge" [class]="product.stock > 0 ? 'bg-success' : 'bg-danger'">
+                      {{ product.stock }}
+                    </span>
+                  </td>
+                  <td>
+                    <button class="btn btn-sm btn-outline-primary me-2" (click)="openEditProductDialog(product)">
+                      <i class="fas fa-edit"></i> Editar
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger" (click)="confirmDelete(product)">
+                      <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                  </td>
+                </tr>
+                <tr *ngIf="products.length === 0">
+                  <td colspan="6" class="text-center">No hay productos registrados</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ngb-toast
+  *ngFor="let toast of toastService.toasts"
+  [class]="toast.classname"
+  [autohide]="true"
+  [delay]="toast.delay"
+  (hidden)="toastService.remove(toast)"
+>
+  <div [innerHTML]="toast.textOrTpl"></div>
+</ngb-toast>

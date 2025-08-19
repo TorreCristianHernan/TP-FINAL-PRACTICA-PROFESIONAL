@@ -1,0 +1,71 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Gestión de Precios</h2>
+        <button class="btn btn-primary" (click)="openNewPriceDialog()">
+          <i class="fas fa-plus"></i> Nuevo Precio
+        </button>
+      </div>
+
+      <div *ngIf="isLoading" class="text-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+      </div>
+
+      <div *ngIf="!isLoading" class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Precio de Venta</th>
+                  <th>Fecha Efectiva</th>
+                  <th>Activo</th>
+                  <th>Producto</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let price of prices">
+                  <td>{{ price.id }}</td>
+                  <td>{{ price.salePrice | currency:'USD':'symbol':'1.2-2' }}</td>
+                  <td>{{ price.effectiveDate | date:'dd/MM/yyyy' }}</td>
+                  <td>
+                    <span class="badge" [class]="price.active ? 'bg-success' : 'bg-secondary'">
+                      {{ price.active ? 'Activo' : 'Inactivo' }}
+                    </span>
+                  </td>
+                  <td>{{ price.product?.name || 'Sin producto' }}</td>
+                  <td>
+                    <button class="btn btn-sm btn-outline-primary me-2" (click)="openEditPriceDialog(price)">
+                      <i class="fas fa-edit"></i> Editar
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger" (click)="confirmDelete(price)">
+                      <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                  </td>
+                </tr>
+                <tr *ngIf="prices.length === 0">
+                  <td colspan="6" class="text-center">No hay precios registrados</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ngb-toast
+  *ngFor="let toast of toastService.toasts"
+  [class]="toast.classname"
+  [autohide]="true"
+  [delay]="toast.delay"
+  (hidden)="toastService.remove(toast)"
+>
+  <div [innerHTML]="toast.textOrTpl"></div>
+</ngb-toast>

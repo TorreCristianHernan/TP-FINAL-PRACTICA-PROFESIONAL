@@ -1,0 +1,212 @@
+<div class="user-form-container">
+  <div class="drawer-header">
+    <h4 class="drawer-title">
+      {{ isEdit ? "Editar Usuario" : "Nuevo Usuario" }}
+    </h4>
+    <button
+      type="button"
+      class="btn-close"
+      (click)="activeModal.dismiss()"
+    ></button>
+  </div>
+
+  <div class="drawer-body">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="firstName" class="form-label">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          id="firstName"
+          formControlName="firstName"
+          [class.is-invalid]="
+            userForm.get('firstName')?.invalid &&
+            userForm.get('firstName')?.touched
+          "
+        />
+        <div
+          *ngIf="
+            userForm.get('firstName')?.invalid &&
+            userForm.get('firstName')?.touched
+          "
+          class="invalid-feedback"
+        >
+          Nombre es requerido
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Apellido</label>
+        <input
+          type="text"
+          class="form-control"
+          id="lastName"
+          formControlName="lastName"
+          [class.is-invalid]="
+            userForm.get('lastName')?.invalid &&
+            userForm.get('lastName')?.touched
+          "
+        />
+        <div
+          *ngIf="
+            userForm.get('lastName')?.invalid &&
+            userForm.get('lastName')?.touched
+          "
+          class="invalid-feedback"
+        >
+          Apellido es requerido
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="phone" class="form-label">Teléfono</label>
+        <input
+          type="text"
+          class="form-control"
+          id="phone"
+          formControlName="phone"
+          [class.is-invalid]="
+            userForm.get('phone')?.invalid &&
+            userForm.get('phone')?.touched
+          "
+        />
+        <div
+          *ngIf="
+            userForm.get('phone')?.invalid &&
+            userForm.get('phone')?.touched
+          "
+          class="invalid-feedback"
+        >
+          Teléfono es requerido
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          formControlName="email"
+          [class.is-invalid]="
+            userForm.get('email')?.invalid &&
+            userForm.get('email')?.touched
+          "
+        />
+        <div
+          *ngIf="
+            userForm.get('email')?.hasError('required') &&
+            userForm.get('email')?.touched
+          "
+          class="invalid-feedback"
+        >
+          Email es requerido
+        </div>
+        <div
+          *ngIf="
+            userForm.get('email')?.hasError('email') &&
+            userForm.get('email')?.touched
+          "
+          class="invalid-feedback"
+        >
+          Email no válido
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          formControlName="password"
+          [class.is-invalid]="
+            userForm.get('password')?.invalid &&
+            userForm.get('password')?.touched
+          "
+        />
+        <div
+          *ngIf="
+            userForm.get('password')?.hasError('required') &&
+            userForm.get('password')?.touched
+          "
+          class="invalid-feedback"
+        >
+          Contraseña es requerido
+        </div>
+        <div
+          *ngIf="
+            userForm.get('password')?.hasError('password') &&
+            userForm.get('password')?.touched
+          "
+          class="invalid-feedback"
+        >
+          Contraseña inválida
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="roles" class="form-label">Rol</label>
+        <input
+          type="role"
+          class="form-control"
+          id="roles"
+          formControlName="roles"
+          [class.is-invalid]="
+            userForm.get('role')?.invalid &&
+            userForm.get('role')?.touched
+          "
+        />
+        <div
+          *ngIf="
+            userForm.get('role')?.hasError('role') &&
+            userForm.get('role')?.touched
+          "
+          class="invalid-feedback"
+        >
+          Rol es requerido
+        </div>
+        <div
+          *ngIf="
+            userForm.get('role')?.hasError('role') &&
+            userForm.get('role')?.touched
+          "
+          class="invalid-feedback"
+        >
+          Rol no válido
+        </div>
+      </div>
+
+      <!-- <div class="mb-3">
+        <label for="telefono" class="form-label">Teléfono</label>
+        <input
+          type="text"
+          class="form-control"
+          id="telefono"
+          formControlName="telefono"
+          [class.is-invalid]="clienteForm.get('telefono')?.invalid && clienteForm.get('telefono')?.touched">
+        <div *ngIf="clienteForm.get('telefono')?.invalid && clienteForm.get('telefono')?.touched"
+             class="invalid-feedback">
+          Teléfono es requerido
+        </div>
+      </div> -->
+
+      <div class="btn-group">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="activeModal.dismiss()"
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="userForm.invalid"
+        >
+          Guardar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

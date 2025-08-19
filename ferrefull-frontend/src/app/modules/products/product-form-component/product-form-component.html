@@ -1,0 +1,76 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ isEdit ? 'Editar Producto' : 'Nuevo Producto' }}</h4>
+  <button type="button" class="btn-close" (click)="activeModal.dismiss()"></button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="sku" class="form-label">SKU *</label>
+      <input
+        type="text"
+        class="form-control"
+        id="sku"
+        formControlName="sku"
+        [class.is-invalid]="productForm.get('sku')?.invalid && productForm.get('sku')?.touched"
+      >
+      <div *ngIf="productForm.get('sku')?.hasError('required') && productForm.get('sku')?.touched"
+           class="invalid-feedback">
+        El SKU es requerido
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="name" class="form-label">Nombre *</label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        formControlName="name"
+        [class.is-invalid]="productForm.get('name')?.invalid && productForm.get('name')?.touched"
+      >
+      <div *ngIf="productForm.get('name')?.hasError('required') && productForm.get('name')?.touched"
+           class="invalid-feedback">
+        El nombre es requerido
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Descripción</label>
+      <textarea
+        class="form-control"
+        id="description"
+        rows="3"
+        formControlName="description"
+      ></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="stock" class="form-label">Stock *</label>
+      <input
+        type="number"
+        class="form-control"
+        id="stock"
+        formControlName="stock"
+        [class.is-invalid]="productForm.get('stock')?.invalid && productForm.get('stock')?.touched"
+      >
+      <div *ngIf="productForm.get('stock')?.hasError('required') && productForm.get('stock')?.touched"
+           class="invalid-feedback">
+        El stock es requerido
+      </div>
+      <div *ngIf="productForm.get('stock')?.hasError('min') && productForm.get('stock')?.touched"
+           class="invalid-feedback">
+        El stock debe ser mayor o igual a 0
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">
+        Cancelar
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="productForm.invalid">
+        {{ isEdit ? 'Actualizar' : 'Guardar' }}
+      </button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,95 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ isEdit ? 'Editar Precio' : 'Nuevo Precio' }}</h4>
+  <button type="button" class="btn-close" (click)="activeModal.dismiss()"></button>
+</div>
+
+<div class="modal-body">
+  <form [formGroup]="priceForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="salePrice" class="form-label">Precio de Venta *</label>
+      <input
+        type="number"
+        step="0.01"
+        class="form-control"
+        id="salePrice"
+        formControlName="salePrice"
+        [class.is-invalid]="priceForm.get('salePrice')?.invalid && priceForm.get('salePrice')?.touched"
+      >
+      <div *ngIf="priceForm.get('salePrice')?.hasError('required') && priceForm.get('salePrice')?.touched"
+           class="invalid-feedback">
+        El precio de venta es requerido
+      </div>
+      <div *ngIf="priceForm.get('salePrice')?.hasError('min') && priceForm.get('salePrice')?.touched"
+           class="invalid-feedback">
+        El precio debe ser mayor o igual a 0
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="effectiveDate" class="form-label">Fecha Efectiva *</label>
+      <input
+        type="date"
+        class="form-control"
+        id="effectiveDate"
+        formControlName="effectiveDate"
+        [class.is-invalid]="priceForm.get('effectiveDate')?.invalid && priceForm.get('effectiveDate')?.touched"
+      >
+      <div *ngIf="priceForm.get('effectiveDate')?.hasError('required') && priceForm.get('effectiveDate')?.touched"
+           class="invalid-feedback">
+        La fecha efectiva es requerida
+      </div>
+    </div>
+
+    <div class="mb-3 position-relative">
+      <label for="productSearch" class="form-label">Producto *</label>
+      <input
+        type="text"
+        class="form-control"
+        id="productSearch"
+        [formControl]="productSearch"
+        placeholder="Buscar producto por nombre o SKU..."
+        [class.is-invalid]="priceForm.get('product')?.invalid && priceForm.get('product')?.touched"
+        autocomplete="off"
+      >
+      <div class="dropdown-menu show position-absolute w-100" 
+           *ngIf="productSearch.value && (filteredProducts | async)?.length"
+           style="max-height: 200px; overflow-y: auto; z-index: 1000;">
+        <button 
+          type="button"
+          class="dropdown-item"
+          *ngFor="let product of filteredProducts | async"
+          (click)="selectProduct(product)"
+        >
+          {{ product.name }} ({{ product.sku }})
+        </button>
+      </div>
+      <div *ngIf="priceForm.get('product')?.hasError('required') && priceForm.get('product')?.touched"
+           class="invalid-feedback">
+        El producto es requerido
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="active"
+          formControlName="active"
+        >
+        <label class="form-check-label" for="active">
+          Activo
+        </label>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="activeModal.dismiss()">
+        Cancelar
+      </button>
+      <button type="submit" class="btn btn-primary" [disabled]="priceForm.invalid">
+        {{ isEdit ? 'Actualizar' : 'Guardar' }}
+      </button>
+    </div>
+  </form>
+</div>

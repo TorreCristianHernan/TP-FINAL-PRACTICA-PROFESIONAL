@@ -1,0 +1,77 @@
+<div class="container mt-4">
+  <!-- Toasts -->
+  <div class="toast-container">
+    <ngb-toast
+      *ngFor="let toast of toastService.toasts"
+      [class]="toast.classname"
+      [autohide]="true"
+      [delay]="toast.delay || 5000"
+      (hidden)="toastService.remove(toast)"
+      [class.show]="!toast.hide"
+      [class.hide]="toast.hide"
+    >
+      {{ toast.textOrTpl }}
+    </ngb-toast>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Listado de Usuarios</h2>
+    <button class="btn btn-success" (click)="openNewUserDialog()">
+      <i class="bi bi-plus"></i> Nuevo Usuario
+    </button> 
+  </div>
+
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Cargando...</span>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading">
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>Estado</th>
+          <th>Rol</th>
+          <th>Tipo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td>{{ user.id }}</td>
+          <td>{{ user.firstName + " " + user.lastName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.phone }}</td>
+          <td>{{ user.state }}</td>
+          <td>{{ user.roles }}</td>
+          <td>{{ user.type }}</td>
+          <td>
+            <div class="btn-group">
+              <button
+                class="btn btn-warning btn-sm"
+                (click)="openEditUserDialog(user)"
+              >
+                <i class="bi bi-pencil"></i> Editar
+              </button> 
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="confirmDelete(user)"
+              >
+                <i class="bi bi-trash"></i> Eliminar
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="users.length === 0" class="alert alert-info">
+      No hay usuarios registrados.
+    </div>
+  </div>
+</div>
