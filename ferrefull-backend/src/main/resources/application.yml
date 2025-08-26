@@ -6,9 +6,9 @@ server:
 
 spring:
   datasource:
-    url:
-    username: 
-    password: 
+    url: jdbc:mysql://ferrefull-ferrefull-ro.g.aivencloud.com:25526/Desarrollo?sslMode=REQUIRED
+    username: ferrefull-be
+    password: AVNS_fvfSTwT6uOAwDjhwHSH
   jpa:
     hibernate:
       ddl-auto: update
