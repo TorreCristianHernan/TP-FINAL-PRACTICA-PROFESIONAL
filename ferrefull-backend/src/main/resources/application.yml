@@ -6,9 +6,9 @@ server:
 
 spring:
   datasource:
-    url: ${DB_URL:jdbc:mysql://localhost:3306/ferrefull}
-    username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:password}
+    url: 
+    username: 
+    password: 
   jpa:
     hibernate:
       ddl-auto: update
